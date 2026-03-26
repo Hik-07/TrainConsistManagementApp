@@ -98,6 +98,7 @@ class TrainConsistManagementAppTest {
                 new Bogie("AC Chair", 56)
         );
 
+
         Map<String, List<Bogie>> result = groupBogies(bogies);
 
         assertEquals(2, result.get("Sleeper").size());
