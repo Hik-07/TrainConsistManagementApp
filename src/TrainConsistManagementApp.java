@@ -1,50 +1,36 @@
-// Custom exception class for invalid passenger bogie capacity
-class InvalidCapacityException extends Exception {
-    public InvalidCapacityException(String message) {
-        super(message);
-    }
-}
+import java.util.*;
+import java.util.stream.Collectors;
 
-// Passenger bogie class with capacity validation
-class PassengerBogie {
-    private String type;
-    private int capacity;
+class Bogie {
+    String name;
+    int capacity;
 
-    // Constructor enforces fail-fast validation
-    public PassengerBogie(String type, int capacity) throws InvalidCapacityException {
-        if (capacity <= 0) {
-            throw new InvalidCapacityException("Capacity must be greater than zero");
-        }
-        this.type = type;
+    Bogie(String name, int capacity) {
+        this.name = name;
         this.capacity = capacity;
     }
 
-    // Getters
-    public String getType() {
-        return type;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    @Override
     public String toString() {
-        return "PassengerBogie{" +
-                "type='" + type + '\'' +
-                ", capacity=" + capacity +
-                '}';
+        return name + " -> " + capacity;
     }
 }
 
-// Example usage
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
-        try {
-            PassengerBogie sleeper = new PassengerBogie("Sleeper", 72);
-            PassengerBogie acChair = new PassengerBogie("AC Chair", 0); // This will throw exception
-        } catch (InvalidCapacityException e) {
-            System.out.println("Error creating bogie: " + e.getMessage());
+
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Sleeper", 70));
+        bogies.add(new Bogie("AC Chair", 60));
+
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
+
+        System.out.println("Grouped Bogies by Type:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
 }
