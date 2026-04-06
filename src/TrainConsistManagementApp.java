@@ -1,50 +1,33 @@
-// ---------------- UC16: Bubble Sort Implementation ----------------
+import java.util.Arrays;
 
-class BubbleSortUtil {
+// ---------------- UC17: Arrays.sort() ----------------
 
-    // Bubble Sort method
-    public static void bubbleSort(int[] arr) {
-        int n = arr.length;
+class BogieSorter {
 
-        // Outer loop → number of passes
-        for (int i = 0; i < n - 1; i++) {
-
-            // Inner loop → compare adjacent elements
-            for (int j = 0; j < n - 1 - i; j++) {
-
-                // If current > next → swap
-                if (arr[j] > arr[j + 1]) {
-
-                    // Swap logic
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-        }
-    }
-
-    // Utility to print array
-    public static void printArray(int[] arr) {
-        for (int val : arr) {
-            System.out.print(val + " ");
-        }
-        System.out.println();
+    // Method to sort bogie names
+    public static void sortBogieNames(String[] bogies) {
+        Arrays.sort(bogies);
     }
 }
 
 // ---------------- MAIN ----------------
-public class Main {
+public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
-        int[] capacities = {72, 56, 24, 70, 60};
+        String[] bogieTypes = {
+                "Sleeper",
+                "AC Chair",
+                "First Class",
+                "General",
+                "Luxury"
+        };
 
-        System.out.print("Before Sorting: ");
-        BubbleSortUtil.printArray(capacities);
+        System.out.println("Before Sorting:");
+        System.out.println(Arrays.toString(bogieTypes));
 
-        BubbleSortUtil.bubbleSort(capacities);
+        BogieSorter.sortBogieNames(bogieTypes);
 
-        System.out.print("After Sorting: ");
-        BubbleSortUtil.printArray(capacities);
+        System.out.println("After Sorting:");
+        System.out.println(Arrays.toString(bogieTypes));
     }
 }
