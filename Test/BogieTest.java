@@ -1,53 +1,46 @@
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GoodsBogieTest {
+class BubbleSortTest {
 
-    // ✅ Safe assignment
     @Test
-    void testCargo_SafeAssignment() {
-        GoodsBogie bogie = new GoodsBogie("Cylindrical");
-        bogie.assignCargo("Petroleum");
+    void testSort_BasicSorting() {
+        int[] arr = {72, 56, 24, 70, 60};
+        BubbleSortUtil.bubbleSort(arr);
 
-        assertEquals("Petroleum", bogie.getCargo());
+        assertArrayEquals(new int[]{24, 56, 60, 70, 72}, arr);
     }
 
-    // ❗ IMPORTANT: Exception is HANDLED internally → so no assertThrows here
     @Test
-    void testCargo_UnsafeAssignmentHandled() {
-        GoodsBogie bogie = new GoodsBogie("Rectangular");
-        bogie.assignCargo("Petroleum");
+    void testSort_AlreadySortedArray() {
+        int[] arr = {24, 56, 60, 70, 72};
+        BubbleSortUtil.bubbleSort(arr);
 
-        // cargo should NOT be assigned
-        assertNull(bogie.getCargo());
+        assertArrayEquals(new int[]{24, 56, 60, 70, 72}, arr);
     }
 
-    // ❗ Ensure cargo remains null after failure
     @Test
-    void testCargo_CargoNotAssignedAfterFailure() {
-        GoodsBogie bogie = new GoodsBogie("Rectangular");
-        bogie.assignCargo("Petroleum");
+    void testSort_DuplicateValues() {
+        int[] arr = {72, 56, 56, 24};
+        BubbleSortUtil.bubbleSort(arr);
 
-        assertNull(bogie.getCargo());
+        assertArrayEquals(new int[]{24, 56, 56, 72}, arr);
     }
 
-    // ✅ Program continuation check
     @Test
-    void testCargo_ProgramContinuesAfterException() {
-        GoodsBogie bogie1 = new GoodsBogie("Rectangular");
-        bogie1.assignCargo("Petroleum"); // fails
+    void testSort_SingleElementArray() {
+        int[] arr = {50};
+        BubbleSortUtil.bubbleSort(arr);
 
-        GoodsBogie bogie2 = new GoodsBogie("Cylindrical");
-        bogie2.assignCargo("Petroleum"); // should still work
-
-        assertEquals("Petroleum", bogie2.getCargo());
+        assertArrayEquals(new int[]{50}, arr);
     }
 
-    // ✅ Finally block indirectly validated (no crash + execution completes)
     @Test
-    void testCargo_FinallyBlockExecution() {
-        GoodsBogie bogie = new GoodsBogie("Rectangular");
+    void testSort_AllEqualValues() {
+        int[] arr = {40, 40, 40};
+        BubbleSortUtil.bubbleSort(arr);
 
-        assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
+        assertArrayEquals(new int[]{40, 40, 40}, arr);
     }
 }
