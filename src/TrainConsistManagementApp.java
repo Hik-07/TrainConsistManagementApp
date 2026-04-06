@@ -34,7 +34,7 @@ class BubbleSortUtil {
 }
 
 // ---------------- MAIN ----------------
-public class Main {
+public class TrainConsistManagementSystem {
     public static void main(String[] args) {
 
         int[] capacities = {72, 56, 24, 70, 60};
