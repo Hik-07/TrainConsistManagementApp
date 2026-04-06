@@ -1,20 +1,30 @@
-// ---------------- UC18: Linear Search ----------------
+import java.util.Arrays;
 
-class BogieSearchUtil {
+// ---------------- UC19: Binary Search ----------------
 
-    // Linear Search Method
-    public static boolean searchBogieById(String[] bogieIds, String key) {
+class BinarySearchUtil {
 
-        // Traverse array sequentially
-        for (int i = 0; i < bogieIds.length; i++) {
+    public static boolean binarySearch(String[] bogieIds, String key) {
 
-            // Use equals() for string comparison
-            if (bogieIds[i].equals(key)) {
-                return true; // Early termination
+        int low = 0;
+        int high = bogieIds.length - 1;
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            int comparison = key.compareTo(bogieIds[mid]);
+
+            if (comparison == 0) {
+                return true; // Found
+            } else if (comparison > 0) {
+                low = mid + 1; // Search right half
+            } else {
+                high = mid - 1; // Search left half
             }
         }
 
-        return false; // Not found after full traversal
+        return false; // Not found
     }
 }
 
@@ -24,9 +34,12 @@ public class TrainConsistManagementApp {
 
         String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
 
+        // Ensure sorted (MANDATORY)
+        Arrays.sort(bogieIds);
+
         String searchKey = "BG309";
 
-        boolean found = BogieSearchUtil.searchBogieById(bogieIds, searchKey);
+        boolean found = BinarySearchUtil.binarySearch(bogieIds, searchKey);
 
         if (found) {
             System.out.println("Bogie found: " + searchKey);
