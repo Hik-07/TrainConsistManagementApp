@@ -1,12 +1,20 @@
-import java.util.Arrays;
+// ---------------- UC18: Linear Search ----------------
 
-// ---------------- UC17: Arrays.sort() ----------------
+class BogieSearchUtil {
 
-class BogieSorter {
+    // Linear Search Method
+    public static boolean searchBogieById(String[] bogieIds, String key) {
 
-    // Method to sort bogie names
-    public static void sortBogieNames(String[] bogies) {
-        Arrays.sort(bogies);
+        // Traverse array sequentially
+        for (int i = 0; i < bogieIds.length; i++) {
+
+            // Use equals() for string comparison
+            if (bogieIds[i].equals(key)) {
+                return true; // Early termination
+            }
+        }
+
+        return false; // Not found after full traversal
     }
 }
 
@@ -14,20 +22,16 @@ class BogieSorter {
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
-        String[] bogieTypes = {
-                "Sleeper",
-                "AC Chair",
-                "First Class",
-                "General",
-                "Luxury"
-        };
+        String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
 
-        System.out.println("Before Sorting:");
-        System.out.println(Arrays.toString(bogieTypes));
+        String searchKey = "BG309";
 
-        BogieSorter.sortBogieNames(bogieTypes);
+        boolean found = BogieSearchUtil.searchBogieById(bogieIds, searchKey);
 
-        System.out.println("After Sorting:");
-        System.out.println(Arrays.toString(bogieTypes));
+        if (found) {
+            System.out.println("Bogie found: " + searchKey);
+        } else {
+            System.out.println("Bogie not found: " + searchKey);
+        }
     }
 }
